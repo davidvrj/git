@@ -1361,7 +1361,7 @@ _git_checkout ()
 	esac
 }
 
-__git_cherry_pick_revert_inprogress_options="--continue --quit --abort"
+__git_cherry_pick_revert_inprogress_options="--continue --quit --abort --skip"
 
 _git_cherry_pick ()
 {
