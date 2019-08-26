@@ -1361,13 +1361,13 @@ _git_checkout ()
 	esac
 }
 
-__git_cherry_pick_inprogress_options="--continue --quit --abort"
+__git_cherry_pick_revert_inprogress_options="--continue --quit --abort --skip"
 
 _git_cherry_pick ()
 {
 	__git_find_repo_path
 	if [ -f "$__git_repo_path"/CHERRY_PICK_HEAD ]; then
-		__gitcomp "$__git_cherry_pick_inprogress_options"
+		__gitcomp "$__git_cherry_pick_revert_inprogress_options"
 		return
 	fi
 
@@ -1376,7 +1376,7 @@ _git_cherry_pick ()
 	case "$cur" in
 	--*)
 		__gitcomp_builtin cherry-pick "" \
-			"$__git_cherry_pick_inprogress_options"
+			"$__git_cherry_pick_revert_inprogress_options"
 		;;
 	*)
 		__git_complete_refs
@@ -2624,20 +2624,18 @@ _git_restore ()
 	esac
 }
 
-__git_revert_inprogress_options="--continue --quit --abort"
-
 _git_revert ()
 {
 	__git_find_repo_path
 	if [ -f "$__git_repo_path"/REVERT_HEAD ]; then
-		__gitcomp "$__git_revert_inprogress_options"
+		__gitcomp "$__git_cherry_pick_revert_inprogress_options"
 		return
 	fi
 	__git_complete_strategy && return
 	case "$cur" in
 	--*)
 		__gitcomp_builtin revert "" \
-			"$__git_revert_inprogress_options"
+			"$__git_cherry_pick_revert_inprogress_options"
 		return
 		;;
 	esac
